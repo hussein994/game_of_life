@@ -31,8 +31,28 @@ def compute_number_of_neighbors(paded_frame, index_row, index_column):
 
 
 def compute_next_frame(frame):
+	# Step 1: Calculate the padded matrix
+    paded_frame = numpy.pad(frame, 1, mode='constant')
+    
 
-	paded_frame = numpy.pad(frame, 1, mode="constant")
+    # Step 2:
+
+    for index_row in range(1, 8):
+        for index_column in range(1, 8):
+            # Step 3: 
+            neighbors = compute_number_of_neighbors(paded_frame, index_row, index_column)
+            # Step 4: 
+            current_cell = paded_frame[index_row, index_column]
+            if current_cell == 1:  
+                if neighbors == 2 or neighbors == 3:
+                    frame[index_row-1, index_column-1] = 1  
+                else:
+                    frame[index_row-1, index_column-1] = 0 
+            else: 
+                if neighbors == 3:
+                    frame[index_row-1, index_column-1] = 1  
+                else:
+                    frame[index_row-1, index_column-1] = 0
 
 	return frame
 
